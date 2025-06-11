@@ -9,7 +9,7 @@ function Dashboard() {
     useEffect(() => {
         // Redirect to login if no user session found
         if (!user) {
-            navigate("/");
+            navigate("/Employees");
         }
     }, [user, navigate]);
 
