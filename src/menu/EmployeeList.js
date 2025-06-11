@@ -29,7 +29,7 @@ function EmployeeList() {
     const [selectedRole, setSelectedRole] = useState(1);
     useEffect(() => {
         if (!localStorage.getItem("user")) {
-            navigate("/");
+            navigate("/Employees");
         } else {
             loadEmployees();
             loaddepartment();
