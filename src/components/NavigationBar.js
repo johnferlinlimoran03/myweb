@@ -12,7 +12,7 @@ function NavigationBar() {
 
     return (
         <AppBar position="static">
-            {localStorage.getItem("user") && (
+          
                 <Toolbar>
                     <Typography variant="h6" sx={{ flexGrow: 1 }}>
                         Employee Management
@@ -37,7 +37,7 @@ function NavigationBar() {
                         Logout
                     </Button>
                 </Toolbar>
-            )}
+           
         </AppBar>
     );
 }

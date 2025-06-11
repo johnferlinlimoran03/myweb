@@ -27,15 +27,7 @@ function EmployeeList() {
     const [roles, setRoles] = useState([]);
     const [selectedDept, setSelectedDept] = useState(1);
     const [selectedRole, setSelectedRole] = useState(1);
-    useEffect(() => {
-        if (!localStorage.getItem("user")) {
-            navigate("/Employees");
-        } else {
-            loadEmployees();
-            loaddepartment();
-            loadrole();
-        }
-    }, [navigate]);
+ 
     const loadrole = async (ID) => {
 
         // const data = await EmployeeService.fetchRole();

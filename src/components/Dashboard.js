@@ -6,12 +6,12 @@ function Dashboard() {
     const navigate = useNavigate();
     const user = localStorage.getItem("user");
 
-    useEffect(() => {
-        // Redirect to login if no user session found
-        if (!user) {
-            navigate("/Employees");
-        }
-    }, [user, navigate]);
+    // useEffect(() => {
+    //     // Redirect to login if no user session found
+    //     if (!user) {
+    //         navigate("/Employees");
+    //     }
+    // }, [user, navigate]);
 
     const handleLogout = () => {
         localStorage.removeItem("user"); // Clear session
