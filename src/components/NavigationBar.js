@@ -33,9 +33,9 @@ function NavigationBar() {
                     >
                         Employees
                     </Button>
-                    <Button color="inherit" onClick={handleLogout}>
+                    {/* <Button color="inherit" onClick={handleLogout}>
                         Logout
-                    </Button>
+                    </Button> */}
                 </Toolbar>
            
         </AppBar>
