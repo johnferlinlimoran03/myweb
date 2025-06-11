@@ -5,10 +5,10 @@ function NavigationBar() {
     const navigate = useNavigate();
     const location = useLocation();
 
-    const handleLogout = () => {
-        localStorage.removeItem("user"); // Clear session
-        navigate("/"); // Redirect to login
-    };
+    // const handleLogout = () => {
+    //     localStorage.removeItem("user"); // Clear session
+    //     navigate("/"); // Redirect to login
+    // };
 
     return (
         <AppBar position="static">
