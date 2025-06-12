@@ -1,45 +1,69 @@
-import { AppBar, Toolbar, Typography, Button } from "@mui/material";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import React from 'react';
+import { Drawer, List, ListItem, ListItemButton, ListItemText, Toolbar, Typography, Box } from '@mui/material';
+import { Link, useLocation } from 'react-router-dom';
 
-function NavigationBar() {
-    const navigate = useNavigate();
-    const location = useLocation();
+const drawerWidth = 240;
 
-    // const handleLogout = () => {
-    //     localStorage.removeItem("user"); // Clear session
-    //     navigate("/"); // Redirect to login
-    // };
+const menuItems = [
+  { name: 'Dashboard', path: '/' },
+  { name: 'Purchase Requests', path: '/requests' },
+  { name: 'Purchase Orders', path: '/orders' },
+  { name: 'Vendors', path: '/vendors' },
+  { name: 'Items', path: '/items' },
+  { name: 'Inventory', path: '/inventory' },
+  { name: 'Reports', path: '/reports' }
+];
 
-    return (
-        <AppBar position="static">
-          
-                <Toolbar>
-                    <Typography variant="h6" sx={{ flexGrow: 1 }}>
-                        Employee Management
-                    </Typography>
-                    <Button
-                        color="inherit"
-                        component={Link}
-                        to="/dashboard"
-                        sx={{ fontWeight: location.pathname === "/dashboard" ? "bold" : "normal" }}
-                    >
-                        Dashboard
-                    </Button>
-                    <Button
-                        color="inherit"
-                        component={Link}
-                        to="/employees"
-                        sx={{ fontWeight: location.pathname === "/employees" ? "bold" : "normal" }}
-                    >
-                        Employees
-                    </Button>
-                    {/* <Button color="inherit" onClick={handleLogout}>
-                        Logout
-                    </Button> */}
-                </Toolbar>
-           
-        </AppBar>
-    );
-}
+const NavigationBar = () => {
+  const location = useLocation();
+
+  return (
+    <Drawer
+      variant="permanent"
+      anchor="left"
+      sx={{
+        width: drawerWidth,
+        flexShrink: 0,
+        [`& .MuiDrawer-paper`]: {
+          width: drawerWidth,
+          boxSizing: 'border-box',
+          backgroundColor: '#0D47A1', // Deep blue
+          color: '#fff'
+        }
+      }}
+    >
+      <Toolbar>
+        <Typography variant="h6" sx={{ color: '#FFA000' }}> {/* Vivid orange */}
+          Purchasing System
+        </Typography>
+      </Toolbar>
+      <Box sx={{ overflow: 'auto' }}>
+        <List>
+          {menuItems.map(item => (
+            <ListItem key={item.name} disablePadding>
+              <ListItemButton
+                component={Link}
+                to={item.path}
+                selected={location.pathname === item.path}
+                sx={{
+                  '&.Mui-selected': {
+                    backgroundColor: '#FFA000', // orange highlight
+                    color: '#fff'
+                  },
+                  '&:hover': {
+                    backgroundColor: '#FFA000',
+                    color: '#fff'
+                  }
+                }}
+              >
+                <ListItemText primary={item.name} />
+              </ListItemButton>
+            </ListItem>
+          ))}
+        </List>
+      </Box>
+    </Drawer>
+  );
+};
 
 export default NavigationBar;
