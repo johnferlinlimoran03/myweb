@@ -25,7 +25,7 @@ function Dashboard() {
           Welcome, {user || "Guest"}!
         </Typography>
         <Typography variant="h6" gutterBottom>
-          Neltext Purchasing Dashboard
+          Neltex Purchasing Dashboard
         </Typography>
 
         <Button
