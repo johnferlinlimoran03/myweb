@@ -193,10 +193,17 @@ function PurchaseOrders() {
     };
 
     let containerMaxWidth;
-    if (zoomRatio < 1.0) containerMaxWidth = 'xl';
-    else if (zoomRatio <= 1.1) containerMaxWidth = 'lg';
-    else if (zoomRatio <= 1.2) containerMaxWidth = 'md';
-    else containerMaxWidth = 'sm';
+    if (zoomRatio < 1.0) {
+        containerMaxWidth = 'xl';
+    } else if (zoomRatio >= 1.0 && zoomRatio <= 1.1) {
+        containerMaxWidth = 'lg';
+    } else if (zoomRatio > 1.1 && zoomRatio <= 1.2) {
+        containerMaxWidth = 'lg';
+    } else if (zoomRatio > 1.2 && zoomRatio <= 1.5) {
+        containerMaxWidth = 'md';
+    } else {
+        containerMaxWidth = 'sm'; // Optional: Handles extreme zoom levels
+    }
 
     const containerPaddingX = zoomRatio > 1.2 ? 1 : 2;
 

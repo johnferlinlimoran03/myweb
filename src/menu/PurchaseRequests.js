@@ -14,6 +14,7 @@ import {
     TextField,
     MenuItem
 } from '@mui/material';
+import { Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material';
 const departments = [
     'Engineering',
     'Finance',
@@ -66,6 +67,11 @@ function PurchaseRequests() {
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
     }, []);
+    const [openDialog, setOpenDialog] = useState(false);
+
+    const handleOpenDialog = () => setOpenDialog(true);
+    const handleCloseDialog = () => setOpenDialog(false);
+
 
     // Adjust containerMaxWidth based on zoom level
     let containerMaxWidth;
@@ -74,9 +80,9 @@ function PurchaseRequests() {
     } else if (zoomRatio >= 1.0 && zoomRatio <= 1.1) {
         containerMaxWidth = 'lg';
     } else if (zoomRatio > 1.1 && zoomRatio <= 1.2) {
-        containerMaxWidth = 'md';
+        containerMaxWidth = 'lg';
     } else if (zoomRatio > 1.2 && zoomRatio <= 1.5) {
-        containerMaxWidth = 'sm';
+        containerMaxWidth = 'md';
     } else {
         containerMaxWidth = 'sm'; // Optional: Handles extreme zoom levels
     }
@@ -128,74 +134,80 @@ function PurchaseRequests() {
                 <Typography variant="h5" gutterBottom>
                     Purchase Requests
                 </Typography>
-                <form onSubmit={handleSubmit} style={{ marginBottom: 24 }}>
-                    <Typography variant="h6" gutterBottom>Create New Purchase Request</Typography>
-
-                    <Stack spacing={2}>
-                        {/* Row: Request ID & Department */}
-                        <Stack direction="row" spacing={2}>
-                            <TextField
-                                label="Request ID"
-                                name="id"
-                                value={newRequest.id}
-                                onChange={handleInputChange}
-                                fullWidth
-                                required
-                            />
-                            <TextField
-                                select
-                                label="Department"
-                                name="department"
-                                value={newRequest.department}
-                                onChange={handleInputChange}
-                                fullWidth
-                                required
-                            >
-                                {departments.map((dept) => (
-                                    <MenuItem key={dept} value={dept}>
-                                        {dept}
-                                    </MenuItem>
-
-                                ))}
-                            </TextField>
-                        </Stack>
-
-                        {/* Row: Item & Quantity */}
-                        <Stack direction="row" spacing={2}>
+                <Stack spacing={2}>
+                    {/* Row: Request ID & Department */}
 
 
-                            <TextField
-                                select
-                                label="Item"
-                                name="item"
-                                value={newRequest.item}
-                                onChange={handleInputChange}
-                                fullWidth
-                                required
-                            >
-                                {items.map((itemName) => (
-                                    <MenuItem key={itemName} value={itemName}>
-                                        {itemName}
-                                    </MenuItem>
-                                ))}
-                            </TextField>
-                            <TextField
-                                label="Quantity"
-                                name="quantity"
-                                type="number"
-                                value={newRequest.quantity}
-                                onChange={handleInputChange}
-                                fullWidth
-                                required
-                            />
-                        </Stack>
 
-                        {/* Submit Button */}
-                        <Button type="submit" variant="contained" color="primary">
-                            Create Request
-                        </Button>
-                    </Stack>
-                </form>
+                    {/* Submit Button */}
+                    <Button variant="contained" color="primary" onClick={handleOpenDialog}>
+                        Create Purchase Request
+                    </Button>
+
+                    <Dialog open={openDialog} onClose={handleCloseDialog} maxWidth="md" fullWidth>
+                        <DialogTitle>Create New Purchase Request</DialogTitle>
+                        <DialogContent dividers>
+                            <form id="create-request-form" onSubmit={handleSubmit}>
+                                <Stack spacing={2} sx={{ mt: 1 }}>
+                                    <Stack direction="row" spacing={2}>
+                                        <TextField
+                                            label="Request ID"
+                                            name="id"
+                                            value={newRequest.id}
+                                            onChange={handleInputChange}
+                                            fullWidth
+                                            required
+                                        />
+                                        <TextField
+                                            select
+                                            label="Department"
+                                            name="department"
+                                            value={newRequest.department}
+                                            onChange={handleInputChange}
+                                            fullWidth
+                                            required
+                                        >
+                                            {departments.map((dept) => (
+                                                <MenuItem key={dept} value={dept}>{dept}</MenuItem>
+                                            ))}
+                                        </TextField>
+                                    </Stack>
+
+                                    <Stack direction="row" spacing={2}>
+                                        <TextField
+                                            select
+                                            label="Item"
+                                            name="item"
+                                            value={newRequest.item}
+                                            onChange={handleInputChange}
+                                            fullWidth
+                                            required
+                                        >
+                                            {items.map((itemName) => (
+                                                <MenuItem key={itemName} value={itemName}>{itemName}</MenuItem>
+                                            ))}
+                                        </TextField>
+                                        <TextField
+                                            label="Quantity"
+                                            name="quantity"
+                                            type="number"
+                                            value={newRequest.quantity}
+                                            onChange={handleInputChange}
+                                            fullWidth
+                                            required
+                                        />
+                                    </Stack>
+                                </Stack>
+                            </form>
+                        </DialogContent>
+                        <DialogActions>
+                            <Button onClick={handleCloseDialog}>Cancel</Button>
+                            <Button type="submit" form="create-request-form" variant="contained">Submit</Button>
+                        </DialogActions>
+                    </Dialog>
+
+                </Stack>
+
 
 
                 <TextField
@@ -206,7 +218,7 @@ function PurchaseRequests() {
                     fullWidth
                     value={filter}
                     onChange={(e) => setFilter(e.target.value)}
-                    sx={{ marginBottom: 2 }}
+                    sx={{ marginBottom: 2, marginTop: 2 }}
                 />
 
                 <TableContainer sx={{ overflowX: 'auto' }}>
