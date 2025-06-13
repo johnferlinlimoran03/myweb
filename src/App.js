@@ -9,8 +9,12 @@ import Vendors from "./menu/Vendors";
 import Items from "./menu/Items";
 import Inventory from "./menu/Inventory";
 import Reports from "./menu/Reports";
-
-
+import SingleSignOn from "./menu/SingleSignOn";
+import ARS from "./menu/ARS";
+import APAS from "./menu/APAS";
+import GFC from "./menu/GFC";
+import IRIS from "./menu/IRIS";
+import WebPortal from "./menu/WebPortal";
 function App() {
   return (
     <Router>
@@ -23,7 +27,12 @@ function App() {
         <Route path="/items" element={<Items />} />
         <Route path="/inventory" element={<Inventory />} />
         <Route path="/reports" element={<Reports />} />
-
+        <Route path="/ars" element={<ARS />} />
+         <Route path="/apas" element={<APAS />} />
+        <Route path="/gfc" element={<GFC />} />
+         <Route path="/iris" element={<IRIS />} />
+        <Route path="/webportal" element={<WebPortal />} />
+        <Route path="/sso" element={<SingleSignOn />} />
       </Routes>
     </Router>
   );
