@@ -58,7 +58,66 @@ const sampleRequests = [
 ];
 
 function PurchaseRequests() {
+    //BASIC
+        console.log("BASIC")
+    //copy an array
+    const original = [1,2,3];
+    const copy = [...original];
+    console.log("copy an array")
+    console.log(copy);
+    //combine array
+    const a= [1,2];
+    const b = [3,4];
+    const combined = [...a, ...b];
+    console.log("combine arrays")
+    console.log(combined);
+    //pass aray elements as functions arguments
+    const nums = [5,10,15];
+    console.log("pass aray elements as functions arguments")
+   console.log(Math.max(...nums));
     const [zoomRatio, setZoomRatio] = useState(window.devicePixelRatio);
+     console.log("INTERMEDIATE LEVEL")
+     //clone an object
+     const user = {name: 'John', role: 'dev'};
+     const clone = {...user};
+     console.log("clone an object");
+     console.log(clone);
+     //- Merge objects
+    const base = {status: 'pending'};
+    const update = {status: 'approved', date: '2025-06-13'};
+    const merged = {...base,...update};
+    console.log("merged object");
+    console.log(merged);
+    // Override properties
+    const config = { theme: 'light', zoom: 1 };
+    const newConfig = { ...config, zoom: 2 };
+  console.log("Override properties");
+    console.log(newConfig);
+    console.log("ADVANCE LEVEL")
+    //immutable updates in nested objects
+    const state = {
+        request: {id :1, status: 'draft'},
+        user: {name: 'John'}
+    };
+    const updated = {
+        ...state,
+        request: {...state.request,     status: ' submited'}
+    }
+    console.log("immutable updates in nested objects");
+    console.log(updated);
+    // const [stateupdate, setStateupdate] = useState(sampleRequests);
+    // //Use in React state updates
+    // setStateupdate(prev=>[...prev,{...newRequest,date:new Date().toISOString().slice(0,10)}])
+    //      console.log("Use in React state updates");
+    // console.log(stateupdate);
+    console.log("Conditional spreading");
+   const isAdmin = true;
+    const user2 = {
+  name: 'John',
+  ...(isAdmin && { role: 'admin' })
+    };
+    console.log(user2);
+
 
     useEffect(() => {
         const handleResize = () => {

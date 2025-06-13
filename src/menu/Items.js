@@ -105,7 +105,7 @@ function Items() {
             </TableHead>
             <TableBody>
               {items.filter((i) =>
-                i.sku.toLowerCase().includes(filter.toLowerCase()) || 
+                i.sku.toLowerCase().includes(filter.toLowerCase()) ||
                 i.category.toLowerCase().includes(filter.toLowerCase())
               ).map((item) => (
                 <TableRow key={item.id}>
@@ -115,16 +115,29 @@ function Items() {
                   <TableCell>{`₱${item.price.toLocaleString('en-PH')}`}</TableCell>
                   <TableCell>{item.available ? 'Available' : 'Out of Stock'}</TableCell>
                   <TableCell>
-                    <Button size="small" variant="outlined" onClick={() => handleEdit(item)}>Edit</Button>
-                    <Button
-                      size="small"
-                      variant="contained"
-                      color={item.available ? 'error' : 'success'}
-                      sx={{ ml: 1 }}
-                      onClick={() => handleToggleAvailability(item.id)}
+                    <Stack
+                      direction={{ xs: 'column', sm: 'row' }}
+                      spacing={1}
+                      alignItems="flex-start"
                     >
-                      {item.available ? 'Disable' : 'Enable'}
-                    </Button>
+                      <Button
+                        size="small"
+                        variant="outlined"
+                        fullWidth
+                        onClick={() => handleEdit(item)}
+                      >
+                        Edit
+                      </Button>
+                      <Button
+                        size="small"
+                        variant="contained"
+                        fullWidth
+                        color={item.available ? 'error' : 'success'}
+                        onClick={() => handleToggleAvailability(item.id)}
+                      >
+                        {item.available ? 'Disable' : 'Enable'}
+                      </Button>
+                    </Stack>
                   </TableCell>
                 </TableRow>
               ))}
@@ -151,10 +164,10 @@ function Items() {
                   type="number"
                   fullWidth
                   value={editingItem.price}
-                  
-                   onChange={(e) =>
-    setEditingItem({ ...editingItem, price: parseFloat(e.target.value) })
-  }
+
+                  onChange={(e) =>
+                    setEditingItem({ ...editingItem, price: parseFloat(e.target.value) })
+                  }
 
                   required
                 />
