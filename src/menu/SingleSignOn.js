@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Container, Paper, Typography, Button, Grid } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import landingImage from "../assets/images/qrcode.png"; // Import image
 
 const remittanceSystems = [
   { name: "ARS", path: "/ars" },
@@ -41,6 +42,11 @@ function SingleSignOn() {
   return (
     <Container maxWidth={containerMaxWidth} sx={{ paddingX: containerPaddingX, textAlign: "center", marginTop: 4 }}>
       <Paper elevation={4} sx={{ padding: 4, backgroundColor: "#81b1ce", color: "#151269" }}>
+            <img
+          src={landingImage}
+          alt="QR"
+          style={{ width: "50%", height: "40%", borderRadius: "8px", marginBottom: "16px" }}
+        />
         <Typography variant="h4" gutterBottom>
           Welcome to Single Sign-On (SSO)
         </Typography>
